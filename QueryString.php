@@ -41,13 +41,7 @@ class QueryString
 	
     protected function __construct()
     {
-        self::$QueryString = $_SERVER['QUERY_STRING'];
-		parse_str(self::$QueryString, self::$QueryStringArray);
-    }
-
-    protected function __clone()
-    {
-    	// Nothing to see here bro...
+        $this -> setQueryString($_SERVER['QUERY_STRING']);
     }
 
     /**
@@ -70,13 +64,11 @@ class QueryString
     
 	public function setQueryString($querystring)
 	{
-		if ($querystring != '')
-		{
-			self::$QueryString = $querystring;
-			parse_str(self::$QueryString, self::$QueryStringArray);
-		}
-		else
+		if (empty($querystring))
 			return false;
+
+		self::$QueryString = $querystring;
+		parse_str(self::$QueryString, self::$QueryStringArray);
 
 		return true;
 	}
@@ -103,7 +95,8 @@ class QueryString
 			self::$QueryStringArray[$key] = $value;
 		}
 
-		self::$QueryString = http_build_query(self::$QueryStringArray);
+		$this -> __buildQuery();
+		return true;
 	}
 
 	/**
@@ -122,8 +115,8 @@ class QueryString
 		foreach ($elements as $key => $element)
 			unset(self::$QueryStringArray[$element]);
 
-		self::$QueryString = http_build_query(self::$QueryStringArray);
-
+		$this -> __buildQuery();
+		return true;
 	}
 
 	/**
@@ -136,5 +129,15 @@ class QueryString
 	{
 		return ($array) ? self::$QueryStringArray : '?' . self::$QueryString;
 	}
+
+	private function __buildQuery()
+	{
+		self::$QueryString = http_build_query(self::$QueryStringArray, false, '&', PHP_QUERY_RFC3986);
+	}
+
+	 protected function __clone()
+    {
+    	// Nothing to see here bro...
+    }
 }
 ?>
