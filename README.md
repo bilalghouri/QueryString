@@ -1,6 +1,10 @@
 # QueryString
 A Singleton URL Query String handler for PHP
 
+# Information
+By default, the class appends new elements to the current url query string that it fetches from the $_SERVER variable.
+You can however, set your own initial query string with the setQueryString() method.
+
 # Usage
 ``` php
 $query = QueryString::getInstance();
