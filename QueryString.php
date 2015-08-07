@@ -139,5 +139,10 @@ class QueryString
     {
         // Nothing to see here bro...
     }
+
+    protected function __wakeup()
+    {
+        // Nope.. Still nothing...
+    }
 }
 ?>
