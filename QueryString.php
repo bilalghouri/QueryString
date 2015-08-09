@@ -127,7 +127,9 @@ class QueryString
     
     public function get($array = false)
     {
-        return ($array) ? self::$QueryStringArray : '?' . self::$QueryString;
+        if (!empty(self::$QueryString))
+            return ($array) ? self::$QueryStringArray : '?' . self::$QueryString;
+        return false;
     }
 
     private function __buildQuery()
