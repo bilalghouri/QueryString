@@ -2,5 +2,10 @@
     "name": "bilalghouri/query-string",
     "description": "A Singleton URL Query String handler for PHP",
     "type": "library",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Bilalghouri\\QueryString\\": "./"
+        }
+    }
 }
