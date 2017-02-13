@@ -10,6 +10,8 @@
  * @license https://raw.githubusercontent.com/bilalghouri/QueryString/master/LICENSE
  */
 
+namespace Bilalghouri\QueryString;
+
 class QueryString
 {
     /**
